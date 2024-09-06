@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hls.Js Duplicate Cues Reproduction</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  </head>
+  <body>
+    <video id="video" width="640" height="360" autoplay controls muted></video>
+    <script type="application/javascript">
+      const mediaElement = document.querySelector('#video');
+      const url = 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls/hls.m3u8';
+
+      const hls = new Hls({});
+      hls.once(Hls.Events.MANIFEST_LOADED, (e, data) => {
+        hls.subtitleTrack = 2;
+      });
+      hls.attachMedia(mediaElement);
+      hls.loadSource(url);
+    </script>
+  </body>
+</html>
